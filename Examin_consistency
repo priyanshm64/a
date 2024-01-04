@@ -1,3 +1,5 @@
+# examin consistency
+
 import numpy as np
 A=np . matrix ([[1 ,2 ,-1],[2 ,1 , 4],[3 ,3 , 4]])
 B=np . matrix ([[1],[2],[1]])
@@ -13,3 +15,84 @@ if ( rA==rAB ):#Checking for consistency
         print("The system has infinitely many solutions ")
 else:
     print ("The system of equations is inconsistent ")
+
+
+
+# eigen value eigen vector
+
+
+import numpy as np 
+I=np.array([[4,3,2],[1,4,1],[3,10,4]])
+print("\n given matrix: \n",I)
+w,v=np.linalg.eig(I)
+print("\n eigen value :\n",w)
+print("\n eigen vectors :\n",v)
+for i in range(3):
+    print("eigen value : \n",w[i])
+    print("\ncorresponding eigen vector: ",v[:,i])
+
+
+#jacobians
+
+#u = xy/z, v = yz/x, w = zx/y then prove that J =4
+
+from sympy import *
+x ,y , z= symbols ('x,y,z')
+u=x*y/z
+v=y*z/x
+w=z*x/y
+dux = diff (u , x )
+duy = diff (u , y )
+duz = diff (u , z )
+dvx = diff (v , x )
+dvy = diff (v , y )
+dvz = diff (v , z )
+dwx = diff (w , x )
+dwy = diff (w , y )
+dwz = diff (w , z )
+J= Matrix ([[dux , duy , duz],
+[dvx , dvy , dvz],
+[dwx , dwy , dwz]]);
+print ("The Jacobian matrix is: ")
+display(J)
+Jac =det(J).doit()
+print (' J = ', Jac )
+
+
+#Largest eigen value
+
+
+import numpy as np
+def normalize (x):
+fac = abs(x).max ()
+x_n = x / x.max ()
+return fac , x_n
+x = np. array ([1, 1,1])
+a = np. array ([[1,1,3 ],
+[1,5,1],[3,1,1]])
+for i in range (10):
+x = np.dot(a, x)
+lambda_1 , x = normalize (x)
+print (' Largest Eigenvalue :', lambda_1 )
+print (' Corresponding Eigenvector :', x)
+
+
+#partial derivatives uxy = uyx
+
+
+fromsympy import*
+x , y = symbols('x y')
+u=exp(x)*(x*cos(y)-y*sin(y))
+print('u(x,y)=',u)
+dux = diff (u , x )
+duy = diff (u , y )
+duxy = diff ( dux , y )
+duyx = diff ( duy , x )
+print('uxy=',duxy)
+print('uyx=',duyx)
+ifduxy == duyx :
+print('Mixed partial derivatives are equal')
+else :
+print('Mixed partial derivatives are not equal')
+
+
